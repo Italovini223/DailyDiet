@@ -1,4 +1,8 @@
-import styled, {css} from "styled-components/native";
+import styled, {css} from 'styled-components/native'
+
+import { ArrowUpRight } from 'phosphor-react-native'
+
+import { TouchableOpacity } from 'react-native'
 
 export type PercentProps = {
   DietUpToDate: boolean
@@ -10,6 +14,8 @@ export const Container = styled.View<PercentProps>`
 
   justify-content: center;
   align-items: center;
+
+  position: relative;
 
   margin-bottom: 40px;
 
@@ -25,9 +31,22 @@ export const PercentText = styled.Text`
 `
 
 export const Description = styled.Text`
-    ${({theme}) => css`
-      font-size: ${theme.FONT_SIZE.SM}px;
-      font-family: ${theme.FONT_FAMILY.REGULAR};
-      color: ${theme.COLORS.GRAY_600};
-    `}
-`
+  ${({theme}) => css`
+    font-size: ${theme.FONT_SIZE.SM}px;
+    font-family: ${theme.FONT_FAMILY.REGULAR};
+    color: ${theme.COLORS.GRAY_600};
+  `}
+`;
+
+export const ArrowButton = styled(TouchableOpacity)`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  background-color: transparent;
+  border: none;
+`;
+
+export const ArrowIcon = styled(ArrowUpRight).attrs(({theme}) => ({
+  size: 24,
+}))``;

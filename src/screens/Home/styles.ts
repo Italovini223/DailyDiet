@@ -8,8 +8,7 @@ export const Container = styled.View`
 
 export const ButtonArea = styled.View`
   justify-content: left;
-  flex: 1;
-  margin-bottom: 100px;
+  margin-bottom: 64px;
 `
 
 export const ButtonLabel = styled.Text`
@@ -32,6 +31,7 @@ export const HeaderList = styled.Text`
 `;
 
 export const ListContent = styled.View`
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
+
 

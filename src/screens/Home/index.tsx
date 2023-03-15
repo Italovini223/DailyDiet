@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react'
 import { SectionList } from 'react-native'
 
-import groupBy  from 'lodash/groupBy'
+import groupBy from 'lodash/groupBy'
 
 import { ButtonArea, ButtonLabel, Container, HeaderList, ListContent } from "./styles";
 
@@ -8,47 +9,106 @@ import { Header } from "@components/Header";
 import { Percent } from "@components/Percent";
 import { Button } from "@components/Button";
 import { Snack } from '@components/Snack';
-import { useEffect, useState } from 'react';
 
 
+type SnackDataProps = {
+  name: string
+  time: string
+  date: string
+  isInsideDiet: boolean
+}
+
+type SnackProps = {
+  title: string;
+  data: SnackDataProps[]
+}
 
 export function Home(){
+  const [snacks, setSnacks] = useState<SnackProps[]>([])
+  const [percent, setPercent] = useState(0)
+
   const snacksTest = [
     {
-      name: "X-tudo",
-      date: "14/03/2022" ,
-      isInsideDiet: false,
+      date: '05/05/2023',
+      time: '8:00',
+      name: 'Banana',
+      isInsideDiet: true
     },
     {
-      name: "salada",
-      date: "14/03/2022" ,
-      isInsideDiet: true,
+      date: '05/05/2023',
+      time: '8:00',
+      name: 'Arroz integral',
+      isInsideDiet: true
     },
     {
-      name: "macarrão",
-      date: "15/03/2022" ,
-      isInsideDiet: false,
+      date: '05/05/2023',
+      time: '8:00',
+      name: 'Mexido',
+      isInsideDiet: false
     },
     {
-      name: "Banana",
-      date: "15/03/2022" ,
-      isInsideDiet: true,
+      date: '06/05/2023',
+      time: '8:00',
+      name: 'Danix',
+      isInsideDiet: false
     },
     {
-      name: "abacate",
-      date: "15/03/2022" ,
-      isInsideDiet: true,
+      date: '06/05/2023',
+      time: '8:00',
+      name: 'Pera',
+      isInsideDiet: true
+    },
+    {
+      date: '06/05/2023',
+      time: '8:00',
+      name: 'Laranja',
+      isInsideDiet: true
+    },
+    {
+      date: '06/05/2023',
+      time: '8:00',
+      name: 'Maracujá',
+      isInsideDiet: true
     },
   ]
 
-  const percent = 90.82
+  const calculatePercent = () => {
+    const isInsideDiet = snacksTest.filter(snack => snack.isInsideDiet === true);
+
+    const total = (isInsideDiet.length / snacksTest.length) * 100
+
+    setPercent(total)
+
+  }
+
+  useEffect(() => {
+    
+
+    const groupedList = Object.values(
+      groupBy(snacksTest, (snack) => {
+        return snack.date
+      })
+    )
+
+    groupedList.map(list => {
+      let snack = {
+        title: list[0].date,
+        data: [...list]
+      }
+
+      setSnacks(prevState => [...prevState, snack])
+    })
+
+    calculatePercent()
+  }, [])
 
   return (
     <Container>
       <Header />
       <Percent 
         DietUpToDate={percent > 50}
-        percent={String(percent).replace('.', ',')}
+        percent={percent}
+        onPressArrow={() => { }}
       />
 
       <ButtonArea>
@@ -63,14 +123,12 @@ export function Home(){
       </ButtonArea>
 
       <SectionList 
-        sections={[
-          {title: '04/05/2022', data: ['X-tudo', 'Alface']},
-          {title: '05/05/2022', data: ['Banana', 'Alface']},
-          {title: '06/05/2022', data: ['Banana', 'Alface']},
-          // {title: '07/05/2022', data: ['Banana', 'Alface']},
-          // {title: '08/05/2022', data: ['Banana', 'Alface']},
+        style={[
+          {flex: 1}, 
         ]}
-        keyExtractor={(item) => item}
+        showsVerticalScrollIndicator={false}
+        sections={snacks}
+        keyExtractor={({name}) => name}
         renderSectionHeader={({section: {title}})=> (
           <HeaderList>
             {title}
@@ -79,9 +137,9 @@ export function Home(){
         renderItem={({item}) => (
           <ListContent>
             <Snack 
-              title={item}
-              time='8:00'
-              isInsideDiet={false}
+              title={item.name}
+              time={item.time}
+              isInsideDiet={item.isInsideDiet}
             />
           </ListContent>
         )}
