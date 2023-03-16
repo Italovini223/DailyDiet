@@ -1,14 +1,19 @@
 import { TextInputProps } from 'react-native'
 
-import { Container, Label, InputComponent } from "./styles";
+import { StyleTypeProps, StyleWidthInputProps, Container, Label, InputComponent } from "./styles";
 
 type Props = TextInputProps & {
-  labelText: string
+  labelText: string;
+  type?: StyleTypeProps;
+  size?: StyleWidthInputProps
 }
 
-export function Input({ labelText, ...rest }:Props) {
+export function Input({ labelText, type = 'Input', size = 'NORMAL', ...rest }:Props) {
   return (
-    <Container>
+    <Container
+      type={type}
+      size={size}
+    >
       <Label >{labelText}</Label>
       <InputComponent
         {...rest}

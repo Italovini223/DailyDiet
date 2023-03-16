@@ -2,13 +2,22 @@ import styled, { css } from 'styled-components/native'
 
 import { TextInput } from 'react-native'
 
-export const Container = styled.View`
-  width: 100%;
- 
-  min-height: 48px;
-  max-height: 48px;
+export type StyleTypeProps = 'Input' | 'TextArea'
+export type StyleWidthInputProps = 'NORMAL' | 'SHORT'
 
-  margin-bottom: 24px;
+type StyleProps = {
+  type: StyleTypeProps;
+  size: StyleWidthInputProps
+}
+
+export const Container = styled.View<StyleProps>`
+  width: ${({ size }) => size === 'SHORT' ? '150px' : '100%'};
+ 
+  min-height: ${({ type }) => type === 'Input' ? '48px' : '120px'};
+  max-height: ${({ type }) => type === 'Input' ? '48px' : '120px'};
+
+
+  margin-bottom: 25px;
 `;
 
 export const Label = styled.Text`
@@ -24,7 +33,6 @@ export const Label = styled.Text`
 export const InputComponent = styled(TextInput)`
   width: 100%;
   height: 100%;
-
 
   border-radius: 6px;
   padding: 16px;

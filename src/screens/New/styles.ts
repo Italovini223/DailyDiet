@@ -1,8 +1,13 @@
-import styled from 'styled-components/native'
+import styled, { css } from 'styled-components/native'
+
+type Components = 'Inptus' | 'Buttons'
+
+type MultiComponentsContainerStyleProps = {
+  componenteType: Components
+}
 
 export const Container = styled.View`
   flex: 1;
-
 
   align-items: center;
 
@@ -18,8 +23,38 @@ export const Content = styled.View`
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
 
-  align-items: center;
-
+  position: relative;
 
   background: ${({theme}) => theme.COLORS.WHITE};
 `;
+
+export const MultiComponentsContainer = styled.View<MultiComponentsContainerStyleProps>`
+  width: 100%;
+
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  ${({ componenteType }) => componenteType === 'Buttons' && css`
+    margin-bottom: 80px;
+  `}
+`;  
+
+
+export const ButtonOptionsLabel = styled.Text`
+  ${({ theme }) => css`
+    font-family: ${theme.FONT_FAMILY.BOLD};
+    font-size: ${theme.FONT_SIZE.SM}px;
+    color: ${theme.COLORS.GRAY_700};
+  `};
+
+  margin-bottom: 8px;
+`;
+
+export const ButtonContainer = styled.View`
+  width: 100%;
+  flex: 1;
+
+
+`;
+
