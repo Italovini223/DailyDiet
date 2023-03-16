@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components'
 
 import theme from './src/theme'
 
-import { Statics } from '@screens/Statics'
+import { New } from '@screens/New'
 
 import { Loading } from '@components/Loading'
 
@@ -22,7 +22,7 @@ export default function App() {
         translucent
       />
       {
-        fontsLoaded ? <Statics /> : <Loading />
+        fontsLoaded ? <New /> : <Loading />
       }
     </ThemeProvider>
   );
