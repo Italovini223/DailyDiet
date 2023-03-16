@@ -2,10 +2,11 @@ import { useFonts,  NunitoSans_400Regular, NunitoSans_700Bold} from '@expo-googl
 
 import { StatusBar } from 'react-native'
 
-import { ThemeProvider} from 'styled-components'
+import { ThemeProvider } from 'styled-components'
+
 import theme from './src/theme'
 
-import { Home } from '@screens/Home'
+import { Statics } from '@screens/Statics'
 
 import { Loading } from '@components/Loading'
 
@@ -21,7 +22,7 @@ export default function App() {
         translucent
       />
       {
-        fontsLoaded ? <Home /> : <Loading />
+        fontsLoaded ? <Statics /> : <Loading />
       }
     </ThemeProvider>
   );

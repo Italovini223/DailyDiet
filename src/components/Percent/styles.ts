@@ -1,8 +1,14 @@
 import styled, {css} from 'styled-components/native'
 
-import { ArrowUpRight } from 'phosphor-react-native'
+import { ArrowUpRight, ArrowLeft } from 'phosphor-react-native'
 
 import { TouchableOpacity } from 'react-native'
+
+export type ArrowPosition = 'LEFT' | 'RIGHT'
+
+type ArrowPositonProps = {
+  position: ArrowPosition
+}
 
 export type PercentProps = {
   DietUpToDate: boolean
@@ -38,15 +44,29 @@ export const Description = styled.Text`
   `}
 `;
 
-export const ArrowButton = styled(TouchableOpacity)`
+export const ArrowButton = styled(TouchableOpacity)<ArrowPositonProps>`
   position: absolute;
-  top: 8px;
-  right: 8px;
+
 
   background-color: transparent;
   border: none;
+
+  ${({ position }) => position === 'LEFT' ? css`
+    top: 0;
+    left: 24px;
+  `: 
+  css`
+    top: 8px;
+    right: 8px;
+  `
+  };
 `;
 
-export const ArrowIcon = styled(ArrowUpRight).attrs(({theme}) => ({
-  size: 24,
-}))``;
+
+export const ArrowUpRightIcon = styled(ArrowUpRight).attrs({
+  size: 24
+})``;
+
+export const ArrowLeftIcon = styled(ArrowLeft).attrs({
+  size: 24
+})``;
