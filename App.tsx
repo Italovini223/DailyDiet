@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components'
 
 import theme from './src/theme'
 
-import { New } from '@screens/New'
+import { AfterCreate } from '@screens/AfterCreate'
 
 import { Loading } from '@components/Loading'
 
@@ -22,7 +22,7 @@ export default function App() {
         translucent
       />
       {
-        fontsLoaded ? <New /> : <Loading />
+        fontsLoaded ? <AfterCreate /> : <Loading />
       }
     </ThemeProvider>
   );

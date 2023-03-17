@@ -31,6 +31,5 @@
   "overrides": {
     "@types/react": "~18.0.14"
   },
-  
   "private": true
 }
