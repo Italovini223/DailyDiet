@@ -9,7 +9,7 @@ export type SnackStaticsStyleProps = {
 
 export const Container = styled.View<SnackStaticsStyleProps>`
   width: 150px;
-  height: 107;
+  height: 107px;
 
   align-items: center;
   justify-content: center;

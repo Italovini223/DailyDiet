@@ -1,10 +1,12 @@
 import styled, { css } from 'styled-components/native'
 
+import { SafeAreaView } from 'react-native-safe-area-context'
+
 export type StyleStaticsProps = {
   DietUpToDate: boolean
 }
 
-export const Container = styled.View<StyleStaticsProps>`
+export const Container = styled(SafeAreaView)<StyleStaticsProps>`
   flex: 1;
 
   padding-top: 20px;

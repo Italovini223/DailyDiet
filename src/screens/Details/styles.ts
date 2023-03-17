@@ -1,12 +1,14 @@
 import styled, { css } from 'styled-components/native'
 
+import { SafeAreaView } from 'react-native-safe-area-context'
+
 export type DietStatus = 'isInsideDiet' | 'isOutsideDiet'
 
 type DetailsStyleProps = {
   dietStatus: DietStatus
 }
 
-export const Container = styled.View<DetailsStyleProps>`
+export const Container = styled(SafeAreaView)<DetailsStyleProps>`
   flex: 1;
 
   background-color: ${({ theme, dietStatus}) => dietStatus === 'isInsideDiet' ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
