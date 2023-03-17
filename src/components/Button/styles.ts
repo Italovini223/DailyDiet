@@ -23,6 +23,7 @@ export const Container = styled(TouchableOpacity)<ButtonProps>`
   border-radius: 6px;
 
   background-color: ${({theme, typeColor}) => typeColor === 'PRIMARY' ? theme.COLORS.GRAY_700 : theme.COLORS.WHITE};
+  border: 1px solid ${({theme, typeColor}) => typeColor === 'SECONDARY' ? theme.COLORS.GRAY_700 : theme.COLORS.WHITE};
 `;
 
 export const Description = styled.Text<ButtonProps>`
