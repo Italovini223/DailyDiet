@@ -1,10 +1,6 @@
 import styled, { css } from 'styled-components/native'
 
-type Components = 'Inptus' | 'Buttons'
 
-type MultiComponentsContainerStyleProps = {
-  componenteType: Components
-}
 
 export const Container = styled.View`
   flex: 1;
@@ -28,16 +24,14 @@ export const Content = styled.View`
   background: ${({theme}) => theme.COLORS.WHITE};
 `;
 
-export const MultiComponentsContainer = styled.View<MultiComponentsContainerStyleProps>`
+export const MultiComponentsContainer = styled.View`
   width: 100%;
 
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 
-  ${({ componenteType }) => componenteType === 'Buttons' && css`
-    margin-bottom: 80px;
-  `}
+
 `;  
 
 
@@ -55,6 +49,8 @@ export const ButtonContainer = styled.View`
   width: 100%;
   flex: 1;
 
-
+  position: absolute;
+  bottom: 20px;
+  left: 24px;
 `;
 

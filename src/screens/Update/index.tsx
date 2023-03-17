@@ -29,7 +29,7 @@ export function Update(){
           style={{textAlignVertical: 'top'}}
         />
 
-        <MultiComponentsContainer componenteType="Inptus">
+        <MultiComponentsContainer>
           <Input 
             labelText="Data"
             size="SHORT"
@@ -45,7 +45,7 @@ export function Update(){
             Está dentro da dieta?
         </ButtonOptionsLabel>
 
-        <MultiComponentsContainer componenteType="Buttons">
+        <MultiComponentsContainer>
 
 
           <ButtonOption 
