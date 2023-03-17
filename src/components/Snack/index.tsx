@@ -1,13 +1,15 @@
+import { TouchableOpacityProps } from 'react-native'
+
 import {SnackTypesProps, Container, SnackTime, SnackTitleArea, SnackTitle, SnackType, Line} from './styles'
 
-type Props = SnackTypesProps & {
+type Props = SnackTypesProps & TouchableOpacityProps & {
   title: string
   time: string
 }
 
-export function Snack({ isInsideDiet, time, title}:Props){
+export function Snack({ isInsideDiet, time, title, ...rest}:Props){
   return (
-    <Container>
+    <Container {...rest}>
       <SnackTime>
         {time}
       </SnackTime>

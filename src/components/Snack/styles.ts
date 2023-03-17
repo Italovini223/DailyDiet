@@ -1,10 +1,12 @@
 import styled, { css } from 'styled-components/native'
 
+import { TouchableOpacity } from 'react-native'
+
 export type SnackTypesProps = {
   isInsideDiet: boolean
 }
 
-export const Container = styled.View`
+export const Container = styled(TouchableOpacity)`
   flex: 1;
   
   min-height: 50px;

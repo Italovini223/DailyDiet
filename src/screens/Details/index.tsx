@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { useNavigation } from '@react-navigation/native'
+
 import { DietStatus, Container, Content, DateAndTime, DateAndTimeContainer, DateAndTimeLabel, DietStatusContainer, DietStatusLight, DietStatusText, SnackDescription, SnackTitle, ButtonsContainer } from './styles'
 
 import { TextHeader } from '@components/TextHeader'
@@ -10,12 +12,15 @@ import { Button } from '@components/Button'
 export function Details(){
   const [dietStatus, setDietStatus] = useState<DietStatus>('isInsideDiet')
 
+  const navigation = useNavigation()
+
   return (
     <Container
       dietStatus={dietStatus}
     >
       <TextHeader 
         text='Refeição'
+        onPress={() => navigation.navigate('home')}
       />
 
       <Content>
@@ -55,6 +60,7 @@ export function Details(){
             <Button 
               title='Editar refeição'
               icon='border-color'
+              onPress={() => navigation.navigate('update')}
             />
 
             <Button 

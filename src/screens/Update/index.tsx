@@ -1,19 +1,30 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-import { ButtonContainer, ButtonOptionsLabel, Container, Content,  MultiComponentsContainer} from "./styles";
+import { useNavigation } from '@react-navigation/native'
 
-import { Button } from "@components/Button";
-import { ButtonOption } from "@components/ButtonOption";
-import { Input } from "@components/Input";
-import { TextHeader } from "@components/TextHeader";
+import { ButtonContainer, ButtonOptionsLabel, Container, Content,  MultiComponentsContainer} from './styles'
+
+import { Button } from '@components/Button'
+import { ButtonOption } from '@components/ButtonOption'
+import { Input } from '@components/Input'
+import { TextHeader } from '@components/TextHeader'
 
 export function Update(){
   const [isButtonSimActive, setIsButtonSimActive] = useState(false)
   const [isButtonNaoActive, setIsButtonNaoActive] = useState(false)
+
+
+  const navigation = useNavigation()
+
+  function handleUpdateSnack(){
+    navigation.navigate('afterCreate')
+  }
+
   return(
     <Container>
       <TextHeader 
         text="Editar refeição"
+        onPress={() => navigation.goBack()}
       />
 
       <Content>
@@ -69,7 +80,8 @@ export function Update(){
         
         <ButtonContainer>
           <Button 
-            title="Cadastrar refeição"
+            title="Salvar alterações"
+            onPress={handleUpdateSnack}
           />
         </ButtonContainer>
 

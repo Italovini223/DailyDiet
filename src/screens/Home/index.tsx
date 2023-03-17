@@ -145,6 +145,7 @@ export function Home(){
               title={item.name}
               time={item.time}
               isInsideDiet={item.isInsideDiet}
+              onPress={() => navigation.navigate('details')}
             />
           </ListContent>
         )}
