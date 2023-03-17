@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { SectionList } from 'react-native'
 
+import { useNavigation } from '@react-navigation/native'
+
 import groupBy from 'lodash/groupBy'
 
 import { ButtonArea, ButtonLabel, Container, HeaderList, ListContent } from "./styles";
@@ -26,6 +28,8 @@ type SnackProps = {
 export function Home(){
   const [snacks, setSnacks] = useState<SnackProps[]>([])
   const [percent, setPercent] = useState(0)
+
+  const navigation = useNavigation()
 
   const snacksTest = [
     {
@@ -108,7 +112,7 @@ export function Home(){
       <Percent 
         DietUpToDate={percent > 50}
         percent={percent}
-        onPressArrow={() => { }}
+        onPressArrow={() => navigation.navigate('statics')}
       />
 
       <ButtonArea>
@@ -119,6 +123,7 @@ export function Home(){
         <Button 
           title="Nova refeição"
           icon="add"
+          onPress={() => navigation.navigate('new')}
         />
       </ButtonArea>
 

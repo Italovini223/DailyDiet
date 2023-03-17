@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components'
 
 import theme from './src/theme'
 
-import { Update } from '@screens/Update'
+import { Routes } from '@routes/index'
 
 import { Loading } from '@components/Loading'
 
@@ -22,7 +22,7 @@ export default function App() {
         translucent
       />
       {
-        fontsLoaded ? <Update /> : <Loading />
+        fontsLoaded ? <Routes /> : <Loading />
       }
     </ThemeProvider>
   );

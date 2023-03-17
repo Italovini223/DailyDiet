@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { useNavigation } from '@react-navigation/native'
+
 import { SnackCreatedStatus, Container, Content, ContentHeader, ContentHeaderText, ContentHeaderTitle, ContentImage, HighlightedText, ButtonContainer, ImageContainer } from "./styles";
 
 import IsInsideDietImage from '@assets/IsInsideDiet.png'
@@ -8,6 +10,9 @@ import { Button } from "@components/Button";
 
 export function AfterCreate(){
   const [dietStatus, SetDietStatus] = useState<SnackCreatedStatus>('IsInsideDiet')
+
+  const navigation = useNavigation()
+
   return (
     <Container>
       <Content>
@@ -45,6 +50,7 @@ export function AfterCreate(){
         <ButtonContainer>
           <Button 
             title="Ir para a página inicial"
+            onPress={() => navigation.navigate('home')}
           />
         </ButtonContainer>
       </Content>

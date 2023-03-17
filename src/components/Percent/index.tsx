@@ -7,10 +7,10 @@ import { PercentProps, ArrowPosition, Container, PercentText, Description, Arrow
 type Props = PercentProps & {
   percent: number;
   onPressArrow: () => void;
-  position?: ArrowPosition
+  ArrowPosition?: ArrowPosition
 }
 
-export function Percent({ DietUpToDate, percent, onPressArrow, position = 'RIGHT' }: Props){
+export function Percent({ DietUpToDate, percent, onPressArrow, ArrowPosition= 'RIGHT' }: Props){
   const theme = useTheme()
   const { COLORS } = theme
   return (
@@ -19,10 +19,10 @@ export function Percent({ DietUpToDate, percent, onPressArrow, position = 'RIGHT
     > 
       <ArrowButton
         onPress={onPressArrow}
-        position={position}
+        position={ArrowPosition}
       >
         {
-          position === 'RIGHT' ? 
+          ArrowPosition === 'RIGHT' ? 
           <ArrowUpRightIcon 
             color={DietUpToDate ? COLORS.GREEN_DARK : COLORS.RED_DARK}
           />

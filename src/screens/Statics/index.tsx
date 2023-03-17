@@ -1,13 +1,17 @@
+import { useNavigation } from '@react-navigation/native'
+
+import { Container, Content, ContentTitle, SnackStaticsContainer } from './styles'
+
 import { GeneralStatics } from '@components/GeneralStatics'
 import { Percent } from '@components/Percent'
 import { SnackStatics } from '@components/SnackStatics'
-import { Container, Content, ContentTitle, SnackStaticsContainer } from './styles'
-
 
 
 
 export function Statics(){
   const percent = 51.25
+
+  const navigation = useNavigation()
   return (
     <Container
       DietUpToDate={percent > 50}
@@ -15,9 +19,9 @@ export function Statics(){
 
       <Percent 
         DietUpToDate={percent > 50}
-        onPressArrow={() => { }}
+        onPressArrow={() => navigation.navigate('home')}
         percent={percent}
-        position='LEFT'
+        ArrowPosition='LEFT'
       />
 
       <Content>

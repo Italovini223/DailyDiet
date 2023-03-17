@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { useNavigation } from '@react-navigation/native'
+
 import { ButtonContainer, ButtonOptionsLabel, Container, Content,  MultiComponentsContainer} from "./styles";
 
 import { Button } from "@components/Button";
@@ -10,10 +12,18 @@ import { TextHeader } from "@components/TextHeader";
 export function New(){
   const [isButtonSimActive, setIsButtonSimActive] = useState(false)
   const [isButtonNaoActive, setIsButtonNaoActive] = useState(false)
+
+  const navigation = useNavigation()
+
+  function handleAddSnack() {
+    navigation.navigate('afterCreate')
+  }
+
   return(
     <Container>
       <TextHeader 
         text="Nova refeição"
+        onPress={() => navigation.navigate('home')}
       />
 
       <Content>
@@ -70,6 +80,7 @@ export function New(){
         <ButtonContainer>
           <Button 
             title="Cadastrar refeição"
+            onPress={handleAddSnack}
           />
         </ButtonContainer>
 
