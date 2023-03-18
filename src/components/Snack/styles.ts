@@ -20,6 +20,7 @@ export const Container = styled(TouchableOpacity)`
 
   padding: 0 10px;
 
+  margin-bottom: 10px;
 
   ${({theme}) => css`
     background-color: ${theme.COLORS.GRAY_200};

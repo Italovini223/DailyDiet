@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import { useNavigation } from '@react-navigation/native'
 
+import { snackCreate } from '@storage/snacks/snacksCreate'
+
 import { ButtonContainer, ButtonOptionsLabel, Container, Content,  MultiComponentsContainer} from "./styles";
 
 import { Button } from "@components/Button";
@@ -13,10 +15,30 @@ export function New(){
   const [isButtonSimActive, setIsButtonSimActive] = useState(false)
   const [isButtonNaoActive, setIsButtonNaoActive] = useState(false)
 
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
+
+
   const navigation = useNavigation()
 
-  function handleAddSnack() {
-    navigation.navigate('afterCreate')
+  async function handleAddSnack() {
+    try {
+      const snack = {
+        name,
+        description,
+        date,
+        time,
+        isInsideDiet: isButtonSimActive ? true : false,
+      }
+
+      await snackCreate(snack)
+
+      navigation.navigate('afterCreate', {snackStatus: snack.isInsideDiet})
+    } catch (error) {
+
+    }
   }
 
   return(
@@ -29,6 +51,8 @@ export function New(){
       <Content>
         <Input 
           labelText="Nome"
+          value={name}
+          onChangeText={setName}
         />
 
         <Input 
@@ -37,17 +61,23 @@ export function New(){
           multiline
           numberOfLines={5}
           style={{textAlignVertical: 'top'}}
+          value={description}
+          onChangeText={setDescription}
         />
 
         <MultiComponentsContainer>
           <Input 
             labelText="Data"
             size="SHORT"
+            value={date}
+            onChangeText={setDate}
           />
 
           <Input 
             labelText="Hora"
             size="SHORT"
+            value={time}
+            onChangeText={setTime}
           />
         </MultiComponentsContainer>
 

@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { SectionList } from 'react-native'
 
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
+
+import { snacksGetAll } from '@storage/snacks/snacksGetAll'
+import { SnackStorageDTO } from '@storage/snacks/snackStorageDTO'
 
 import groupBy from 'lodash/groupBy'
 
-import { ButtonArea, ButtonLabel, Container, HeaderList, ListContent } from "./styles";
+import { ButtonArea, ButtonLabel, Container, HeaderList } from "./styles";
 
 import { Header } from "@components/Header";
 import { Percent } from "@components/Percent";
@@ -13,16 +16,10 @@ import { Button } from "@components/Button";
 import { Snack } from '@components/Snack';
 
 
-type SnackDataProps = {
-  name: string
-  time: string
-  date: string
-  isInsideDiet: boolean
-}
 
 type SnackProps = {
   title: string;
-  data: SnackDataProps[]
+  data: SnackStorageDTO[]
 }
 
 export function Home(){
@@ -31,80 +28,53 @@ export function Home(){
 
   const navigation = useNavigation()
 
-  const snacksTest = [
-    {
-      date: '05/05/2023',
-      time: '8:00',
-      name: 'Banana',
-      isInsideDiet: true
-    },
-    {
-      date: '05/05/2023',
-      time: '8:00',
-      name: 'Arroz integral',
-      isInsideDiet: true
-    },
-    {
-      date: '05/05/2023',
-      time: '8:00',
-      name: 'Mexido',
-      isInsideDiet: false
-    },
-    {
-      date: '06/05/2023',
-      time: '8:00',
-      name: 'Danix',
-      isInsideDiet: false
-    },
-    {
-      date: '06/05/2023',
-      time: '8:00',
-      name: 'Pera',
-      isInsideDiet: true
-    },
-    {
-      date: '06/05/2023',
-      time: '8:00',
-      name: 'Laranja',
-      isInsideDiet: true
-    },
-    {
-      date: '06/05/2023',
-      time: '8:00',
-      name: 'Maracujá',
-      isInsideDiet: true
-    },
-  ]
 
-  const calculatePercent = () => {
-    const isInsideDiet = snacksTest.filter(snack => snack.isInsideDiet === true);
+  const calculatePercent = (snacks : SnackStorageDTO[]) => {
+    const isInsideDiet = snacks.filter(snack => snack.isInsideDiet === true);
 
-    const total = (isInsideDiet.length / snacksTest.length) * 100
-
+    const total = (isInsideDiet.length / snacks.length) * 100
     setPercent(total)
+  }
+  
 
+  async function fetchSnacks() {
+    try {
+
+      setSnacks([])
+
+      const storage = await snacksGetAll()
+
+      const groupedList = Object.values(
+        groupBy(storage, (snack) => {
+          return snack.date
+        })
+      )
+  
+      groupedList.map(list => {
+        let snack = {
+          title: list[0].date,
+          data: [...list]
+        }
+
+        setSnacks(prevState => [...prevState, snack])
+        
+      })
+      
+      calculatePercent(storage)
+
+    } catch (error) {
+
+    }
   }
 
-  useEffect(() => {
-    
 
-    const groupedList = Object.values(
-      groupBy(snacksTest, (snack) => {
-        return snack.date
-      })
-    )
+  useFocusEffect(useCallback( () => {
+    fetchSnacks()
+  }, []))
 
-    groupedList.map(list => {
-      let snack = {
-        title: list[0].date,
-        data: [...list]
-      }
-
-      setSnacks(prevState => [...prevState, snack])
-    })
-
-    calculatePercent()
-  }, [])
+  // useEffect(() => {
+  //   fetchSnacks()
+  // },[])
 
   return (
     <Container>
@@ -128,26 +98,26 @@ export function Home(){
       </ButtonArea>
 
       <SectionList 
-        style={[
-          {flex: 1}, 
-        ]}
-        showsVerticalScrollIndicator={false}
         sections={snacks}
-        keyExtractor={({name}) => name}
+        showsVerticalScrollIndicator={false}
+        initialNumToRender={0}
+        keyExtractor={({name, date}) => name + date}
         renderSectionHeader={({section: {title}})=> (
           <HeaderList>
             {title}
           </HeaderList>
         )}
         renderItem={({item}) => (
-          <ListContent>
-            <Snack 
-              title={item.name}
-              time={item.time}
-              isInsideDiet={item.isInsideDiet}
-              onPress={() => navigation.navigate('details')}
-            />
-          </ListContent>
+          <Snack 
+            title={item.name}
+            time={item.time}
+            isInsideDiet={item.isInsideDiet}
+            onPress={() => navigation.navigate('details', { 
+              date: item.date,
+              name: item.name
+            })}
+          />
+
         )}
       />
     </Container>

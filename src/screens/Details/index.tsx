@@ -1,6 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useNavigation } from '@react-navigation/native'
+import { useRoute } from '@react-navigation/native'
+
+
 
 import { DietStatus, Container, Content, DateAndTime, DateAndTimeContainer, DateAndTimeLabel, DietStatusContainer, DietStatusLight, DietStatusText, SnackDescription, SnackTitle, ButtonsContainer } from './styles'
 
@@ -11,9 +14,17 @@ import { Button } from '@components/Button'
 
 export function Details(){
   const [dietStatus, setDietStatus] = useState<DietStatus>('isInsideDiet')
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
 
   const navigation = useNavigation()
+  const route = useRoute()
 
+  useEffect(() => {
+
+  }, [])
   return (
     <Container
       dietStatus={dietStatus}
@@ -25,11 +36,11 @@ export function Details(){
 
       <Content>
         <SnackTitle>
-          X-tudo
+          {name}
         </SnackTitle>
 
         <SnackDescription>
-          Xis completo da lancheria do bairro
+          {description}
         </SnackDescription>
 
         <DateAndTimeContainer>
@@ -38,7 +49,7 @@ export function Details(){
           </DateAndTimeLabel>
 
           <DateAndTime>
-            12/08/2022 às 20:00
+            {date} às {time}
           </DateAndTime>
 
         </DateAndTimeContainer>

@@ -32,8 +32,4 @@ export const HeaderList = styled.Text`
   margin-bottom: 8px;
 `;
 
-export const ListContent = styled.View`
-  margin-bottom: 10px;
-`;
-
 

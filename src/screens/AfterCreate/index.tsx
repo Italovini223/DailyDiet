@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 import { SnackCreatedStatus, Container, Content, ContentHeader, ContentHeaderText, ContentHeaderTitle, ContentImage, HighlightedText, ButtonContainer, ImageContainer } from "./styles";
 
@@ -8,10 +8,25 @@ import IsInsideDietImage from '@assets/IsInsideDiet.png'
 import IsOutsideDietImage from '@assets/isOutsideDiet.png'
 import { Button } from "@components/Button";
 
+type RouteParam = {
+  snackStatus: boolean
+}
+
 export function AfterCreate(){
   const [dietStatus, SetDietStatus] = useState<SnackCreatedStatus>('IsInsideDiet')
 
   const navigation = useNavigation()
+  const route = useRoute()
+
+  useEffect(() => {
+    const { snackStatus } = route.params as RouteParam
+
+    if(snackStatus){
+      SetDietStatus('IsInsideDiet')
+    } else {
+      SetDietStatus('isOutsideDiet')
+    }
+  }, [])
 
   return (
     <Container>

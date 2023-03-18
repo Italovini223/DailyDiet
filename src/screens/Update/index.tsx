@@ -17,7 +17,7 @@ export function Update(){
   const navigation = useNavigation()
 
   function handleUpdateSnack(){
-    navigation.navigate('afterCreate')
+    //navigation.navigate('afterCreate')
   }
 
   return(
