@@ -62,15 +62,16 @@ export function Home(){
       
       calculatePercent(storage)
 
-      snacks.sort((a, b) => {
-        if(a.title < b.title) {
-          return -1
-        } else {
-          return 1
-        }
-      })
+      // const snacksOrderByDate = snacks.sort((a, b) => {
+      //   if(a.title < b.title) {
+      //     return -1
+      //   } else {
+      //     return 1
+      //   }
+      // })
 
-      setSnacks(snacks)
+      // setSnacks(snacksOrderByDate)
+
     } catch (error) {
 
     }
@@ -80,11 +81,7 @@ export function Home(){
   useFocusEffect(useCallback( () => {
     fetchSnacks()
   }, []))
-
-  // useEffect(() => {
-  //   fetchSnacks()
-  // },[])
-
+  
   return (
     <Container>
       <Header />

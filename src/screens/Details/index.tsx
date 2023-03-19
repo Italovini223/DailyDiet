@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
 
+import { Alert } from 'react-native'
+
 import { useNavigation } from '@react-navigation/native'
 import { useRoute } from '@react-navigation/native'
 
+import { snackDeleteByNameAndId } from '@storage/snacks/snackDeleteByNameAndDate'
 
 
 import { DietStatus, Container, Content, DateAndTime, DateAndTimeContainer, DateAndTimeLabel, DietStatusContainer, DietStatusLight, DietStatusText, SnackDescription, SnackTitle, ButtonsContainer } from './styles'
@@ -10,7 +13,7 @@ import { DietStatus, Container, Content, DateAndTime, DateAndTimeContainer, Date
 import { TextHeader } from '@components/TextHeader'
 import { Button } from '@components/Button'
 import { snackGetByNameAndDate } from '@storage/snacks/snackGetByNameAndDate'
-import { set } from 'lodash'
+
 
 type RouteParams = {
   name: string;
@@ -47,9 +50,29 @@ export function Details(){
     
   }
 
+  async function deleteSnack() {
+    await snackDeleteByNameAndId(name, date)
+
+    navigation.navigate('home')
+  }
+
+  function handleSDeleteSnack() {
+    Alert.alert("Excluir", "Deseja realmente excluir o registro da refeição?", [
+      {
+        text: "Cancelar",
+        style: 'cancel'
+      },
+      {
+        text: "Sim, excluir",
+        onPress: () => deleteSnack()
+      }
+    ])
+  }
+
   useEffect(() => {
     fetchSnack()
   }, [])
+
   return (
     <Container
       dietStatus={dietStatus}
@@ -103,6 +126,7 @@ export function Details(){
               title='Excluir refeição'
               typeColor='SECONDARY'
               icon='delete'
+              onPress={handleSDeleteSnack}
             />
         </ButtonsContainer>
 
