@@ -9,8 +9,13 @@ import { DietStatus, Container, Content, DateAndTime, DateAndTimeContainer, Date
 
 import { TextHeader } from '@components/TextHeader'
 import { Button } from '@components/Button'
+import { snackGetByNameAndDate } from '@storage/snacks/snackGetByNameAndDate'
+import { set } from 'lodash'
 
-
+type RouteParams = {
+  name: string;
+  date: string;
+}
 
 export function Details(){
   const [dietStatus, setDietStatus] = useState<DietStatus>('isInsideDiet')
@@ -22,8 +27,28 @@ export function Details(){
   const navigation = useNavigation()
   const route = useRoute()
 
-  useEffect(() => {
+  async function fetchSnack(){
 
+    const { date, name } = route.params as RouteParams
+    const data = await snackGetByNameAndDate(name, date)
+
+    const [snack]= data
+
+    setName(snack.name)
+    setDescription(snack.description)
+    setDate(snack.date)
+    setTime(snack.time)
+
+    if(snack.isInsideDiet) {
+      setDietStatus('isInsideDiet')
+    } else {
+      setDietStatus('isOutsideDiet')
+    }
+    
+  }
+
+  useEffect(() => {
+    fetchSnack()
   }, [])
   return (
     <Container
@@ -71,7 +96,7 @@ export function Details(){
             <Button 
               title='Editar refeição'
               icon='border-color'
-              onPress={() => navigation.navigate('update')}
+              onPress={() => navigation.navigate('update' , {name, date})}
             />
 
             <Button 

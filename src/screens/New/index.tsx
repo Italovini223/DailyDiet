@@ -92,7 +92,7 @@ export function New(){
             text="Sim"
             isActive={isButtonSimActive}
             onPress={() => {
-              setIsButtonSimActive(!isButtonSimActive)
+              setIsButtonSimActive(true)
               setIsButtonNaoActive(false)
             }}
           />
@@ -101,7 +101,7 @@ export function New(){
             text="Não" 
             isActive={isButtonNaoActive} 
             onPress={() => {
-              setIsButtonNaoActive(!isButtonNaoActive)
+              setIsButtonNaoActive(true)
               setIsButtonSimActive(false)
             }}
           />

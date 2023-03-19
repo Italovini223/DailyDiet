@@ -62,6 +62,15 @@ export function Home(){
       
       calculatePercent(storage)
 
+      snacks.sort((a, b) => {
+        if(a.title < b.title) {
+          return -1
+        } else {
+          return 1
+        }
+      })
+
+      setSnacks(snacks)
     } catch (error) {
 
     }
@@ -100,7 +109,7 @@ export function Home(){
       <SectionList 
         sections={snacks}
         showsVerticalScrollIndicator={false}
-        initialNumToRender={0}
+        initialNumToRender={1}
         keyExtractor={({name, date}) => name + date}
         renderSectionHeader={({section: {title}})=> (
           <HeaderList>
@@ -116,7 +125,7 @@ export function Home(){
               date: item.date,
               name: item.name
             })}
-          />
+        />
 
         )}
       />

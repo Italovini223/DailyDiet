@@ -5,7 +5,7 @@ export declare global {
       details: { name: string, date: string}
       new: undefined
       afterCreate: {snackStatus: boolean}
-      update: undefined
+      update: { name: string, date: string}
       statics: undefined
     }
   }
