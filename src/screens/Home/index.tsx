@@ -32,8 +32,13 @@ export function Home(){
   const calculatePercent = (snacks : SnackStorageDTO[]) => {
     const isInsideDiet = snacks.filter(snack => snack.isInsideDiet === true);
 
-    const total = (isInsideDiet.length / snacks.length) * 100
-    setPercent(total)
+    if(snacks.length > 0) {
+      const total = (isInsideDiet.length / snacks.length) * 100
+      setPercent(total)
+    } else {
+      setPercent(0)
+    }
+
   }
   
 
@@ -62,20 +67,14 @@ export function Home(){
       
       calculatePercent(storage)
 
-      // const snacksOrderByDate = snacks.sort((a, b) => {
-      //   if(a.title < b.title) {
-      //     return -1
-      //   } else {
-      //     return 1
-      //   }
-      // })
 
-      // setSnacks(snacksOrderByDate)
 
     } catch (error) {
 
     }
   }
+
+
 
 
   useFocusEffect(useCallback( () => {
