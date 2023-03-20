@@ -87,7 +87,7 @@ export function Home(){
       <Percent 
         DietUpToDate={percent > 50}
         percent={percent}
-        onPressArrow={() => navigation.navigate('statics')}
+        onPressArrow={() => navigation.navigate('statics', {percent})}
       />
 
       <ButtonArea>

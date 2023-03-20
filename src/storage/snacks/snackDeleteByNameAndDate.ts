@@ -15,7 +15,6 @@ export async function snackDeleteByNameAndId(name: string, date: string){
 
     const newStorage = storage.filter(snack => snack.name !== snackDeleted.name && snack.time !== snackDeleted.time)
 
-   console.log(newStorage)
 
     AsyncStorage.setItem(SNACK_COLLECTION, JSON.stringify(newStorage))
 
