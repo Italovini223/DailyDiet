@@ -1,6 +1,10 @@
 import { useState } from "react";
 
+import { Alert } from "react-native";
+
 import { useNavigation } from '@react-navigation/native'
+
+import { AppError } from '@utils/AppError'
 
 import { snackCreate } from '@storage/snacks/snacksCreate'
 
@@ -25,6 +29,10 @@ export function New(){
 
   async function handleAddSnack() {
     try {
+      if(!name || !description || !date || !time) {
+        throw new AppError('Preencha todos os campos para criar uma nova refeição')
+      }
+
       const snack = {
         name,
         description,
@@ -36,8 +44,13 @@ export function New(){
       await snackCreate(snack)
 
       navigation.navigate('afterCreate', {snackStatus: snack.isInsideDiet})
+      
     } catch (error) {
-
+      if(error instanceof AppError){
+        Alert.alert("Nova refeição", error.message)
+      } else {
+        Alert.alert("Nova refeição", "Nao foi possível cadastrar a nova refeição")
+      }
     }
   }
 
