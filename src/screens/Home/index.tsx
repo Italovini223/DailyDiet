@@ -75,8 +75,6 @@ export function Home(){
   }
 
 
-
-
   useFocusEffect(useCallback( () => {
     fetchSnacks()
   }, []))

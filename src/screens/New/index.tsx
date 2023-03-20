@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import { Alert } from "react-native";
-
 import { useNavigation } from '@react-navigation/native'
 
 import { AppError } from '@utils/AppError'
@@ -23,7 +22,6 @@ export function New(){
   const [description, setDescription] = useState('')
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
-
 
   const navigation = useNavigation()
 

@@ -2,8 +2,6 @@ import styled, { css } from 'styled-components/native'
 
 import { TextInput } from 'react-native'
 
-
-
 export type StyleTypeProps = 'Input' | 'TextArea'
 export type StyleWidthInputProps = 'NORMAL' | 'SHORT'
 
