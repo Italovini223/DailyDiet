@@ -51,6 +51,8 @@ Inicie o servidor
 - expo
 - styled-component
 - lodash
+- react-native-async-storage
+
 
 
 
